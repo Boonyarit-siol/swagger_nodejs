@@ -109,3 +109,77 @@ app.get('/api/items', (req, res) => {
 app.post('/api/items', (req, res) => {
     // Your route logic here
 });
+/**
+ * @swagger
+ * /api/items/{id}:
+ *   put:
+ *     summary: Update an item
+ *     description: Update the details of an existing item.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the item to update.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: The updated item.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 name:
+ *                   type: string
+ *       404:
+ *         description: Item not found.
+ */
+app.put('/api/items/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const updatedItem = {
+        id,
+        name: req.body.name,
+    };
+
+    // Update item logic here
+
+    res.json(updatedItem);
+});
+/**
+ * @swagger
+ * /api/items/{id}:
+ *   delete:
+ *     summary: Delete an item
+ *     description: Delete an existing item.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the item to delete.
+ *     responses:
+ *       204:
+ *         description: Item successfully deleted.
+ *       404:
+ *         description: Item not found.
+ */
+app.delete('/api/items/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    // Delete item logic here
+
+    res.status(204).send();
+});
